@@ -6,8 +6,8 @@
  * He left a sticky note: "the slide-back thing is optional probably".
  * It is not optional. Good luck.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Abdullah Ashraf
+ * @version 1
  */
 public class Typist
 {
@@ -18,8 +18,12 @@ public class Typist
     // A third tracks HOW MANY turns of burnout remain (not just whether they are burnt out).
     // The remaining three should be fairly obvious.
 
-
-
+    private char typistSymbol;
+    private String typistName;
+    private double typistAccuracy;
+    private int typistProgress;
+    private int burnoutRemaining;
+    private boolean burntOut;
 
     // Constructor of class Typist
     /**
@@ -32,7 +36,12 @@ public class Typist
      */
     public Typist(char typistSymbol, String typistName, double typistAccuracy)
     {
-
+        this.typistSymbol = typistSymbol;
+        this.typistName = typistName;
+        this.typistAccuracy = typistAccuracy;
+        this.typistProgress = 0;
+        this.burntOut = false;
+        this.burnoutRemaining = 0;
     }
 
 
