@@ -78,6 +78,7 @@ public class Typist
                 isBurnt = false;
             }
             this.burntOut = isBurnt;
+            this.burnoutRemaining = BurnoutTurns;
         }
     }
 
