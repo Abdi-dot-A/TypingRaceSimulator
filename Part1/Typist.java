@@ -66,7 +66,19 @@ public class Typist
      */
     public void recoverFromBurnout()
     {
-       
+        int BurnoutTurns = this.getBurnoutTurnsRemaining();
+        boolean isBurnt = this.isBurntOut();
+
+        if (isBurnt){
+            if (BurnoutTurns > 0){
+                BurnoutTurns = BurnoutTurns -1;
+            }
+            
+            if (BurnoutTurns == 0){
+                isBurnt = false;
+            }
+            this.burntOut = isBurnt;
+        }
     }
 
     /**
