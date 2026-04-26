@@ -55,7 +55,8 @@ public class Typist
      */
     public void burnOut(int turns)
     {
-
+        this.burntOut = true;
+        this.burnoutRemaining = turns;
     }
 
     /**
@@ -65,7 +66,7 @@ public class Typist
      */
     public void recoverFromBurnout()
     {
-
+        
     }
 
     /**
