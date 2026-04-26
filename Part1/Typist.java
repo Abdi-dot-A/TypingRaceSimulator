@@ -89,7 +89,7 @@ public class Typist
      */
     public double getAccuracy()
     {
-        return 0.0; // placeholder - replace with correct implementation
+        return this.typistAccuracy;
     }
 
     /**
@@ -101,7 +101,7 @@ public class Typist
      */
     public int getProgress()
     {
-        return 0; // placeholder - replace with correct implementation
+        return this.typistProgress;
     }
 
     /**
@@ -111,7 +111,7 @@ public class Typist
      */
     public String getName()
     {
-        return ""; // placeholder - replace with correct implementation
+        return this.typistName;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Typist
      */
     public char getSymbol()
     {
-        return ' '; // placeholder - replace with correct implementation
+        return this.typistSymbol;
     }
 
     /**
