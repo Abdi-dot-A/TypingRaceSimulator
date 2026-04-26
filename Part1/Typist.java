@@ -66,7 +66,7 @@ public class Typist
      */
     public void recoverFromBurnout()
     {
-        
+       
     }
 
     /**
@@ -119,7 +119,7 @@ public class Typist
      */
     public int getBurnoutTurnsRemaining()
     {
-        return 0; // placeholder - replace with correct implementation
+        return this.burnoutRemaining;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Typist
      */
     public boolean isBurntOut()
     {
-        return false; // placeholder - replace with correct implementation
+        return this.burntOut;
     }
 
     /**
