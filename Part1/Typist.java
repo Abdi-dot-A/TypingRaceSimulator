@@ -201,7 +201,14 @@ public class Typist
      */
     public void setAccuracy(double newAccuracy)
     {
+        if (newAccuracy < 0){
+            newAccuracy = 0.0;
+        }
+        else if (newAccuracy > 1){
+            newAccuracy = 1.0;
+        }
 
+        this.typistAccuracy = newAccuracy;
     }
 
     /**
@@ -211,7 +218,7 @@ public class Typist
      */
     public void setSymbol(char newSymbol)
     {
-
+        this.typistSymbol = newSymbol;
     }
 
 }
