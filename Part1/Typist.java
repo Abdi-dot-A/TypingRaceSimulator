@@ -141,7 +141,9 @@ public class Typist
      */
     public void resetToStart()
     {
-
+        this.burntOut = false;
+        this.burnoutRemaining = 0;
+        this.typistProgress = 0;
     }
 
     /**
