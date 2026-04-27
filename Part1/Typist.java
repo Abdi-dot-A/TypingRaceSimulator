@@ -162,7 +162,14 @@ public class Typist
      */
     public void typeCharacter()
     {
+        boolean burntout = this.isBurntOut();
+        int progress = this.getProgress();
 
+        if (!burntout){
+            progress += 1;
+        }
+
+        this.typistProgress = progress;
     }
 
     /**
