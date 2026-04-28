@@ -1,5 +1,4 @@
 import java.util.concurrent.TimeUnit;
-import java.lang.Math;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -82,6 +81,7 @@ public class TypingRace
         // (Ty was in a hurry here)
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
+        seat3Typist.resetToStart();
 
         while (!finished)
         {
@@ -106,6 +106,15 @@ public class TypingRace
         }
 
         // TODO (Task 2a): Print the winner's name here
+        if (raceFinishedBy(seat1Typist)){
+            System.out.println("And the winner is... "+seat1Typist.getName()+"!");
+        }
+        else if (raceFinishedBy(seat2Typist)){
+            System.out.println("And the winner is... "+seat2Typist.getName()+"!");
+        }
+        else{
+            System.out.println("And the winner is... "+seat3Typist.getName()+"!");
+        }
     }
 
     /**
@@ -258,4 +267,11 @@ public class TypingRace
             i = i + 1;
         }
     }
+    public static void main(String[] args) {
+    TypingRace race = new TypingRace(10);
+    race.addTypist(new Typist('①', "TURBOFINGERS", 0.85), 1);
+    race.addTypist(new Typist('②', "QWERTY_QUEEN",  0.60), 2);
+    race.addTypist(new Typist('③', "HUNT_N_PECK",   0.30), 3);
+    race.startRace();
+}
 }
