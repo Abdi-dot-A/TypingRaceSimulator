@@ -18,6 +18,7 @@ public class TypingRace
     private Typist seat1Typist;
     private Typist seat2Typist;
     private Typist seat3Typist;
+    private int raceTurnCount;
     private boolean seat1Mistyped;
     private boolean seat2Mistyped;
     private boolean seat3Mistyped;
@@ -91,11 +92,15 @@ public class TypingRace
         seat2Typist.resetToStart();
         seat3Typist.resetToStart();
 
+        raceTurnCount = 0;
+
         while (!finished)
         {
             seat1Mistyped = false;
             seat2Mistyped = false;
             seat3Mistyped = false;
+
+            raceTurnCount = raceTurnCount + 1;
 
             // Advance each typist by one turn
             advanceTypist(seat1Typist, 1);
@@ -266,21 +271,40 @@ public class TypingRace
         System.out.print(' ');
 
         // Print name and accuracy
+        int wpm = estimateWPM(theTypist);
         if (theTypist.isBurntOut())
         {
             System.out.print(theTypist.getName()
                 + " (Accuracy: " + theTypist.getAccuracy() + ")"
-                + " BURNT OUT (" + theTypist.getBurnoutTurnsRemaining() + " turns)");
+                + " BURNT OUT (" + theTypist.getBurnoutTurnsRemaining() + " turns)"
+                + "  WPM: " + wpm);
         }
         else
         {
             System.out.print(theTypist.getName()
-                + " (Accuracy: " + theTypist.getAccuracy() + ")");
+                + " (Accuracy: " + theTypist.getAccuracy() + ")"
+                + "  WPM: " + wpm);
             if ((seatNumber == 1 && seat1Mistyped) || (seatNumber == 2 && seat2Mistyped) || (seatNumber == 3 && seat3Mistyped))
             {
                 System.out.print(" <-- just mistyped");
             }
         }
+    }
+
+    /*
+    * Estimate words-per-minute for a typist 
+    */
+    private int estimateWPM(Typist theTypist)
+    {
+        if (raceTurnCount <= 0)
+        {
+            return 0;
+        }
+        // each turn equals 200 milliseconds
+        double Seconds = raceTurnCount * 0.2;
+        double words = theTypist.getProgress() / 5.0;
+        double wpm = words / Seconds * 60.0;
+        return (int) Math.round(wpm);
     }
 
     /**
