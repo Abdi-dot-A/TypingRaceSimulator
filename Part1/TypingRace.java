@@ -18,6 +18,9 @@ public class TypingRace
     private Typist seat1Typist;
     private Typist seat2Typist;
     private Typist seat3Typist;
+    private boolean seat1Mistyped;
+    private boolean seat2Mistyped;
+    private boolean seat3Mistyped;
 
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
@@ -90,10 +93,14 @@ public class TypingRace
 
         while (!finished)
         {
+            seat1Mistyped = false;
+            seat2Mistyped = false;
+            seat3Mistyped = false;
+
             // Advance each typist by one turn
-            advanceTypist(seat1Typist);
-            advanceTypist(seat2Typist);
-            advanceTypist(seat3Typist);
+            advanceTypist(seat1Typist, 1);
+            advanceTypist(seat2Typist, 2);
+            advanceTypist(seat3Typist, 3);
 
             // Print the current state of the race
             printRace();
@@ -135,7 +142,7 @@ public class TypingRace
      *
      * @param theTypist the typist to advance
      */
-    private void advanceTypist(Typist theTypist)
+    private void advanceTypist(Typist theTypist, int seatNumber)
     {
         if (theTypist.isBurntOut())
         {
@@ -154,6 +161,15 @@ public class TypingRace
         if (Math.random() < (1-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
+            if (seatNumber == 1){
+                seat1Mistyped = true;
+            }
+            else if (seatNumber == 2) {
+                seat2Mistyped= true;
+            }
+            else if (seatNumber == 3) {
+                seat3Mistyped = true;
+            }
         }
 
         // Burnout check — pushing too hard increases burnout risk
@@ -196,13 +212,13 @@ public class TypingRace
         multiplePrint('=', passageLength + 3);
         System.out.println();
 
-        printSeat(seat1Typist);
+        printSeat(seat1Typist, 1);
         System.out.println();
 
-        printSeat(seat2Typist);
+        printSeat(seat2Typist, 2);
         System.out.println();
 
-        printSeat(seat3Typist);
+        printSeat(seat3Typist, 3);
         System.out.println();
 
         multiplePrint('=', passageLength + 3);
@@ -216,13 +232,14 @@ public class TypingRace
      * Examples:
      *   |          ⌨           | TURBOFINGERS (Accuracy: 0.85)
      *   |    [zz]              | HUNT_N_PECK  (Accuracy: 0.40) BURNT OUT (2 turns)
+     *   |    [<]               | HUNT_N_PECK  (just mistyped)
      *
      * Note: Ty forgot to show when a typist has just mistyped. That would
      * be a nice improvement — perhaps a [<] marker after their symbol.
      *
      * @param theTypist the typist whose lane to print
      */
-    private void printSeat(Typist theTypist)
+    private void printSeat(Typist theTypist, int seatNumber)
     {
         int spacesBefore = theTypist.getProgress();
         int spacesAfter  = passageLength - theTypist.getProgress();
@@ -237,6 +254,11 @@ public class TypingRace
         {
             System.out.print('~');
             spacesAfter--; // symbol + ~ together take two characters
+        }
+        else if ((seatNumber == 1 && seat1Mistyped) || (seatNumber == 2 && seat2Mistyped) || (seatNumber == 3 && seat3Mistyped))
+        {
+            System.out.print("[<]");
+            spacesAfter -= 3;
         }
 
         multiplePrint(' ', spacesAfter);
@@ -254,6 +276,10 @@ public class TypingRace
         {
             System.out.print(theTypist.getName()
                 + " (Accuracy: " + theTypist.getAccuracy() + ")");
+            if ((seatNumber == 1 && seat1Mistyped) || (seatNumber == 2 && seat2Mistyped) || (seatNumber == 3 && seat3Mistyped))
+            {
+                System.out.print(" <-- just mistyped");
+            }
         }
     }
 
@@ -273,7 +299,7 @@ public class TypingRace
         }
     }
     public static void main(String[] args) {
-    TypingRace race = new TypingRace(10);
+    TypingRace race = new TypingRace(40);
     race.addTypist(new Typist('①', "TURBOFINGERS", 0.85), 1);
     race.addTypist(new Typist('②', "QWERTY_QUEEN",  0.60), 2);
     race.addTypist(new Typist('③', "HUNT_N_PECK",   0.30), 3);
