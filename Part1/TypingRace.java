@@ -33,10 +33,14 @@ public class TypingRace
      */
     public TypingRace(int passageLength)
     {
+        if (passageLength <= 0){
+            passageLength = 1;
+        }
         this.passageLength = passageLength;
         seat1Typist = null;
         seat2Typist = null;
         seat3Typist = null;
+        
     }
 
     /**
