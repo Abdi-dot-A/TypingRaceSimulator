@@ -1,4 +1,5 @@
 import java.util.concurrent.TimeUnit;
+import java.math;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -150,7 +151,7 @@ public class TypingRace
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
-        if (Math.random() < theTypist.getAccuracy() * MISTYPE_BASE_CHANCE)
+        if (Math.random() < (1-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }
