@@ -291,6 +291,9 @@ public class TypingRace
      */
     private void multiplePrint(char aChar, int times)
     {
+        if (times <= 0) {
+            return;
+        }
         int i = 0;
         while (i < times)
         {
