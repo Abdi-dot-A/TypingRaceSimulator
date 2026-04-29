@@ -14,5 +14,6 @@ public class TypingRaceGUI {
         frame.setSize(500,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }   
 }
