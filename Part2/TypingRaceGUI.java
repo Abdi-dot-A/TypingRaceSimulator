@@ -48,7 +48,7 @@ public class TypingRaceGUI {
 /*
 * This is the class for each passage object
 */
-public class passage{
+private class passage{
     String classification;
     String passageWords;
     int charLength;
