@@ -6,7 +6,6 @@ import java.awt.event.*;
  */
 public class TypingRaceGUI {
 
-    passage passageSelection;
     
     final passage PassA = new passage("Short", "the quick brown fox jumps over the lazy dog", 43);
     final passage PassB = new passage("Medium", "the quick brown fox jumped over the lazy dog but was not able to jump higher than the fence", 91);
@@ -23,15 +22,6 @@ public class TypingRaceGUI {
         sWindow.setLocationRelativeTo(null);
         sWindow.setLayout(null);
 
-        JButton startButton = new JButton("Start Race");
-        startButton.setBounds(125,200,220,50);
-        startButton.addActionListener(new ActionListener (){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                raceWindow();
-                sWindow.setVisible(false);
-            }
-        });
 
         JComboBox passageSelection = new JComboBox<>();
         passageSelection.addItem("Short");
@@ -43,6 +33,16 @@ public class TypingRaceGUI {
         JLabel passageLabel = new JLabel("Select a passage length");
         passageLabel.setBounds(50,50, 150, 30);
 
+        JButton startButton = new JButton("Start Race");
+        startButton.setBounds(125,200,220,50);
+        startButton.addActionListener(new ActionListener (){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                raceWindow((String)passageSelection.getSelectedItem());
+                sWindow.setVisible(false);
+            }
+        });
+
         sWindow.add(startButton);
         sWindow.add(passageSelection);
         sWindow.add(passageLabel);
@@ -50,7 +50,7 @@ public class TypingRaceGUI {
         sWindow.setVisible(true);
     }
     
-    public static void raceWindow(){
+    public static void raceWindow(String passLength){
         JFrame rWindow = new JFrame("Race Window GUI");
         rWindow.setSize(500,300);
         rWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
