@@ -15,5 +15,10 @@ public class TypingRaceGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+
+        JButton startButton = new JButton("Start Race");
+        startButton.setBounds(125,200,220,50);
+
+        frame.add(startButton);
     }   
 }
