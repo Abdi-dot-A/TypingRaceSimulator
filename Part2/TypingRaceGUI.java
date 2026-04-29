@@ -29,6 +29,7 @@ public class TypingRaceGUI {
             @Override
             public void actionPerformed(ActionEvent e){
                 raceWindow();
+                sWindow.setVisible(false);
             }
         });
 
