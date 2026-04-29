@@ -14,11 +14,11 @@ public class TypingRaceGUI {
     }
 
     public static void startWindow(){
-        JFrame frame = new JFrame("Start Window GUI");
-        frame.setSize(500,300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
+        JFrame sWindow = new JFrame("Start Window GUI");
+        sWindow.setSize(500,300);
+        sWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        sWindow.setLocationRelativeTo(null);
+        sWindow.setLayout(null);
 
         JButton startButton = new JButton("Start Race");
         startButton.setBounds(125,200,220,50);
@@ -33,12 +33,16 @@ public class TypingRaceGUI {
         JLabel passageLabel = new JLabel("Select a passage length");
         passageLabel.setBounds(50,50, 150, 30);
 
-        frame.add(startButton);
-        frame.add(passageSelection);
-        frame.add(passageLabel);
+        sWindow.add(startButton);
+        sWindow.add(passageSelection);
+        sWindow.add(passageLabel);
 
-        frame.setVisible(true);
-    }   
+        sWindow.setVisible(true);
+    }
+    
+    public static void raceWindow(){
+
+    }
 }
 
 /*
