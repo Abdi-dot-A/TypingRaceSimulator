@@ -5,6 +5,9 @@ import javax.swing.*;
  */
 public class TypingRaceGUI {
     
+    final passage PassA = new passage("Short", "the quick brown fox jumps over the lazy dog", 43);
+    final passage PassB = new passage("Medium", "the quick brown fox jumped over the lazy dog but was not able to jump higher than the fence", 91);
+    final passage PassC = new passage("Long", "the quick brown fox jumped over the lazy dog, but was unable to jump over the fence, so it had to go to the pond instead.", 121);
     public static void main (String [] args){
         startWindow();
     }
