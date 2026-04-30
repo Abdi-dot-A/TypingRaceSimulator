@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 /*
 * This is the GUI window for the typing race program
@@ -17,7 +17,7 @@ public class TypingRaceGUI {
 
     public static void startWindow(){
         JFrame sWindow = new JFrame("Start Window GUI");
-        sWindow.setSize(500,300);
+        sWindow.setSize(500,400);
         sWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sWindow.setLocationRelativeTo(null);
         sWindow.setLayout(null);
@@ -43,14 +43,26 @@ public class TypingRaceGUI {
         seatCount.setBounds(200, 100, 200, 30);
         seatCount.setSelectedItem("2");
 
+        JCheckBox autocorrect = new JCheckBox("Autocorrect Off/On");
+        autocorrect.setBounds(50, 150, 150, 30);
+
+        JCheckBox caffeine = new JCheckBox("Caffeine Mode");
+        caffeine.setBounds(50, 190, 150, 30);
+
+        JCheckBox nightShift = new JCheckBox("Night Shift");
+        nightShift.setBounds(50, 230, 150, 30);
+
         JButton startButton = new JButton("Start Race");
-        startButton.setBounds(125, 200, 220, 50);
+        startButton.setBounds(125, 300, 220, 50);
         startButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 String passageType = (String)passageSelection.getSelectedItem();
                 int numTypists = Integer.parseInt((String)seatCount.getSelectedItem());
-                raceWindow(passageType, numTypists);
+                boolean autocorrectOn = autocorrect.isSelected();
+                boolean caffeineMode = caffeine.isSelected();
+                boolean nightShiftMode = nightShift.isSelected();
+                raceWindow(passageType, numTypists, autocorrectOn, caffeineMode, nightShiftMode);
                 sWindow.setVisible(false);
             }
         });
@@ -59,12 +71,15 @@ public class TypingRaceGUI {
         sWindow.add(passageSelection);
         sWindow.add(seatLabel);
         sWindow.add(seatCount);
+        sWindow.add(autocorrect);
+        sWindow.add(caffeine);
+        sWindow.add(nightShift);
         sWindow.add(startButton);
 
         sWindow.setVisible(true);
     }
     
-    public static void raceWindow(String passLength, int numTypists){
+    public static void raceWindow(String passLength, int numTypists, boolean autocorrectOn, boolean caffeineMode, boolean nightShiftMode){
         JFrame rWindow = new JFrame("Race Window GUI");
         rWindow.setSize(500,300);
         rWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
