@@ -213,6 +213,11 @@ public class TypingRaceGUI {
             passageSelected = PassC;
         }
 
+        JLabel raceInfo = new JLabel("Passage: " + passageSelected.classification + " | Typists: " + typists.length + " | Autocorrect: " + autocorrectOn + " | Caffeine: " + caffeineMode + " | Night Shift: " + nightShiftMode);
+        raceInfo.setBounds(20, 20, 460, 30);
+
+        rWindow.add(raceInfo);
+
         rWindow.setVisible(true);
     }
 
@@ -227,15 +232,74 @@ public class TypingRaceGUI {
     }
 
     public static void saveTypistSettings(Typist typist, String style, String keyboard, String symbolText, String colour, boolean wristSupport, boolean energyDrink, boolean headphones){
+        double accuracy = 0.75;
+        double speed = 1.0;
+        double burnout = 0.0;
+
+        if (style.equals("Touch Typist")){
+            accuracy = accuracy + 0.10;
+            speed = speed + 0.10;
+        }
+        else if (style.equals("Hunt & Peck")){
+            accuracy = accuracy - 0.10;
+            speed = speed - 0.10;
+            burnout = burnout + 0.10;
+        }
+        else if (style.equals("Phone Thumbs")){
+            accuracy = accuracy - 0.05;
+            speed = speed + 0.15;
+            burnout = burnout + 0.05;
+        }
+        else{
+            accuracy = accuracy + 0.15;
+            speed = speed + 0.20;
+            burnout = burnout - 0.05;
+        }
+
+        if (keyboard.equals("Mechanical")){
+            accuracy = accuracy + 0.05;
+            speed = speed + 0.05;
+        }
+        else if (keyboard.equals("Membrane")){
+            speed = speed - 0.02;
+        }
+        else if (keyboard.equals("Touchscreen")){
+            accuracy = accuracy - 0.05;
+            speed = speed - 0.05;
+            burnout = burnout + 0.05;
+        }
+        else{
+            accuracy = accuracy + 0.03;
+            speed = speed + 0.15;
+        }
+
+        if (wristSupport){
+            burnout = burnout - 0.10;
+        }
+
+        if (energyDrink){
+            accuracy = accuracy + 0.03;
+            speed = speed + 0.05;
+            burnout = burnout + 0.05;
+        }
+
+        if (headphones){
+            accuracy = accuracy + 0.04;
+        }
+
         typist.setTypingStyle(style);
         typist.setKeyboardType(keyboard);
         typist.setColour(colour);
         typist.setWristSupport(wristSupport);
         typist.setEnergyDrink(energyDrink);
         typist.setNoiseCancellingHeadphones(headphones);
+        typist.setSpeed(speed);
+        typist.setBurnoutModifier(burnout);
 
         if (symbolText != null && symbolText.length() > 0){
             typist.setSymbol(symbolText.charAt(0));
         }
+
+        typist.setAccuracy(accuracy);
     }
 }
