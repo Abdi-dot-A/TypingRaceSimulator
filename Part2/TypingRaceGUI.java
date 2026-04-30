@@ -151,11 +151,25 @@ public class TypingRaceGUI {
         infoArea.setLineWrap(true);
         infoArea.setWrapStyleWord(true);
 
+        final int[] currentTypist = {0};
+        loadTypistSettings(typists[0], styleSelect, keyboardSelect, symbolInput, colourSelect, wristSupport, energyDrink, headphones);
+
+        typistSelect.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                int nextTypist = typistSelect.getSelectedIndex();
+                saveTypistSettings(typists[currentTypist[0]], (String)styleSelect.getSelectedItem(), (String)keyboardSelect.getSelectedItem(), symbolInput.getText(), (String)colourSelect.getSelectedItem(), wristSupport.isSelected(), energyDrink.isSelected(), headphones.isSelected());
+                loadTypistSettings(typists[nextTypist], styleSelect, keyboardSelect, symbolInput, colourSelect, wristSupport, energyDrink, headphones);
+                currentTypist[0] = nextTypist;
+            }
+        });
+
         JButton startButton = new JButton("Start Race");
         startButton.setBounds(200, 380, 220, 50);
         startButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                saveTypistSettings(typists[currentTypist[0]], (String)styleSelect.getSelectedItem(), (String)keyboardSelect.getSelectedItem(), symbolInput.getText(), (String)colourSelect.getSelectedItem(), wristSupport.isSelected(), energyDrink.isSelected(), headphones.isSelected());
                 raceWindow(passLength, numTypists, autocorrectOn, caffeineMode, nightShiftMode, typists);
                 tWindow.setVisible(false);
             }
@@ -200,5 +214,28 @@ public class TypingRaceGUI {
         }
 
         rWindow.setVisible(true);
+    }
+
+    public static void loadTypistSettings(Typist typist, JComboBox<String> styleSelect, JComboBox<String> keyboardSelect, JTextField symbolInput, JComboBox<String> colourSelect, JCheckBox wristSupport, JCheckBox energyDrink, JCheckBox headphones){
+        styleSelect.setSelectedItem(typist.getTypingStyle());
+        keyboardSelect.setSelectedItem(typist.getKeyboardType());
+        symbolInput.setText(String.valueOf(typist.getSymbol()));
+        colourSelect.setSelectedItem(typist.getColour());
+        wristSupport.setSelected(typist.hasWristSupport());
+        energyDrink.setSelected(typist.hasEnergyDrink());
+        headphones.setSelected(typist.hasNoiseCancellingHeadphones());
+    }
+
+    public static void saveTypistSettings(Typist typist, String style, String keyboard, String symbolText, String colour, boolean wristSupport, boolean energyDrink, boolean headphones){
+        typist.setTypingStyle(style);
+        typist.setKeyboardType(keyboard);
+        typist.setColour(colour);
+        typist.setWristSupport(wristSupport);
+        typist.setEnergyDrink(energyDrink);
+        typist.setNoiseCancellingHeadphones(headphones);
+
+        if (symbolText != null && symbolText.length() > 0){
+            typist.setSymbol(symbolText.charAt(0));
+        }
     }
 }
