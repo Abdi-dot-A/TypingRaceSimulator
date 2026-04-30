@@ -42,7 +42,26 @@ java TypingRace
 
 ## Part 2 — GUI Simulation
 
-To be implemented as part of the coursework. Place all GUI-related source files in this folder. The graphical version is started by calling `startRaceGUI()`.
+### How to compile
+
+```bash
+cd Part2
+javac *.java
+```
+
+### How to run
+
+```bash
+java TypingRaceGUI
+```
+
+The GUI provides:
+- **Passage Selection**: Short, Medium, or Long passages
+- **Seat Count**: Configure 2-6 typists
+- **Difficulty Modifiers**: Autocorrect, Caffeine Mode, Night Shift
+- **Typist Customisation**: Choose typing style, keyboard type, symbol/colour, and accessories (Wrist Support, Energy Drink, Noise-Cancelling Headphones)
+
+Each customisation choice affects the typist's accuracy, speed, and burnout profile.
 
 ## Dependencies
 
